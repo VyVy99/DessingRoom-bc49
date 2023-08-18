@@ -14,6 +14,7 @@
   ],
   "tabPanes": [
     {
+   
       "id": "topcloth_1",
       "type": "topclothes",
       "name": "Top Cloth 1",
@@ -247,3 +248,5 @@
     }
   ]
 }
+
+
