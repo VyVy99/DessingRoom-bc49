@@ -33,3 +33,28 @@ const RenderNavPills = () => {
     document.getElementById("nav-pills").innerHTML = content
 }
 RenderNavPills();
+
+const tryOnProduct = (id) => {
+    console.log(product);
+    const tabPanes = Data.tabPanes;
+
+    for (let i = 0; i < tabPanes.length; i++) {
+        if (tabPanes[i].id === id) {
+            const { id, type, name, desc, imgSrc_jpg, imgSrc_png } = tabPanes[i];
+            product = new Product(id, type, name, desc, imgSrc_jpg, imgSrc_png);
+            break;
+        }
+    }
+
+    console.log("Đã mặc thử sản phẩm có ID: ", productId);
+
+    document.querySelectorAll(".col-md-4 .background").style.backgroundImage = `url(./../images/background/${product.imgSrc_jpg})`;
+
+    RenderNavPills()
+
+};
+
+
+
+
+
