@@ -3,11 +3,11 @@ export class ProductType {
         this.tabName = tabName;
         this.showName = showName;
         this.type = type;
-//navpill
+        //navpill
     }
 }
 export class Product {
-//tabPanes
+    //tabPanes
     constructor(id, type, name, desc, imgSrc_jpg, imgSrc_png) {
         this.id = id;
         this.type = type;
@@ -24,5 +24,3 @@ export class Product {
 //tabPanes:san pham 
 //  dựa vô type để lấy dữ liệu, show name làm nội dung
 
-
- 

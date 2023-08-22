@@ -2,12 +2,11 @@
 
 import Data from "../data/Data.json" assert { type: 'json' };
 import { Product, ProductType } from "../models/index.js";
-console.log(Data);
+
 
 const RenderNavPills = () => {
   let content = ""
   const NavPills = Data.navPills
-  console.log(NavPills);
   for (let index = 0; index < NavPills.length; index++) {
     const productType = new ProductType()
 
@@ -15,65 +14,80 @@ const RenderNavPills = () => {
 
       productType[key] = NavPills[index][key]// == value
     }
-    console.log(productType);
 
-    if (index === 0) { // index chinh la ob, key la thuoc tinh
-      content += `
+    content += `
                     <li class="nav-item">
-              <a class="nav-link active" href="#">${productType.showName}</a>
+                    <button onclick="RenderProductsByTab('${productType.type}')" class="btn btn-info m-2" >
+                    ${productType.showName}
+                    </button>
             </li>
         `
-    } else {
-      content += `
-                    <li class="nav-item">
-              <a class="nav-link " href="#">${productType.showName}</a>
-            </li>
-        `
-    }
   }
   document.getElementById("nav-pills").innerHTML = content
 }
+
+
+const RenderProductsByTab = (type = Data.navPills[0].type) => {//default is tab áo
+  const tabPanes = Data.tabPanes
+  let products = [], content = ""
+  if (tabPanes) {
+    products = tabPanes.filter(product => product.type === type)
+  }
+  for (let index = 0; index < products.length; index++) {
+    const product = new Product()
+    for (let key in products[index]) {
+      product[key] = products[index][key]
+    }
+    content += `
+            <div class="col-3">
+            <div class="card">
+                <img class="card-img-top" src="${product.imgSrc_jpg}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                        <p class="card-text">${product.desc}</p>
+
+                    <button onclick="TryOnProduct('${product.id}')" class="btn btn-primary">Thử đồ</button>
+                </div>
+            </div>
+            </div>
+        `
+
+  }
+  document.getElementById("tab-content").innerHTML = content
+
+
+}
+
+
 RenderNavPills();
+RenderProductsByTab()
 
+const TryOnProduct = (id) => {
+  const product = Data.tabPanes.find(item => item.id === id) //return object is true or undefind is false
 
-const chooseItem=()=>{
-  let { tabPanes, navPills } = objectData;
-  console.log(tabPanes);
-  for (let tab of tabPanes) {
-    for (let pill of navPills) {
-  
-      }
+  if (product) {
+    switch (product.type) {
+      case "shoes":
+        document.getElementsByClassName("feet")[0].style.backgroundImage = `url(${product.imgSrc_png})`
+        break;
+
+      case "topclothes":
+        document.getElementsByClassName("bikinitop")[0].style.backgroundImage = `url(${product.imgSrc_png})`
+        break;
+
+      case "botclothes":
+        console.log(document.getElementsByClassName("bikinibottom"));
+        document.getElementsByClassName("bikinibottom")[0].style.backgroundImage = `url(${product.imgSrc_png})`
+        break;
+
+      default:
+        console.log(product.type);
+        document.getElementsByClassName(`${product.type}`)[0].style.backgroundImage = `url(${product.imgSrc_png})`
+
+        break;
     }
   }
-
-
-
-
-
-
-const tryOnProduct = (id) => {
-  console.log(product);
-  const tabPanes = Data.tabPanes;
-
-  for (let i = 0; i < tabPanes.length; i++) {
-    if (tabPanes[i].id === id) {
-      const { id, type, name, desc, imgSrc_jpg, imgSrc_png } = tabPanes[i];
-      product = new Product(id, type, name, desc, imgSrc_jpg, imgSrc_png);
-      break;
-
-
-    }
-
-  }
-
-  console.log("Đã mặc thử sản phẩm có ID: ", productId);
-
-  document.querySelectorAll(".col-md-4 .background").style.backgroundImage = `url(./../images/background/${product.imgSrc_jpg})`;
-
-  RenderNavPills()
-
 };
-// tryOnProduct(id)
 
-
-
+window.RenderProductsByTab = RenderProductsByTab
+window.TryOnProduct = TryOnProduct

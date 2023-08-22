@@ -24,6 +24,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 .card.hovercard {
   position: relative;
   padding-top: 0;
@@ -40,6 +41,7 @@
   margin: 0 auto;
   position: relative;
 }
+
 .body {
   width: 250px;
   height: 500px;
@@ -48,6 +50,7 @@
   top: 12%;
   left: 22%;
 }
+
 .bikinitop {
   width: 250px;
   height: 500px;
@@ -78,7 +81,7 @@
   z-index: 1;
 }
 
-.handbag {
+.handbags {
   width: 500px;
   height: 1000px;
   position: absolute;
@@ -88,7 +91,7 @@
   z-index: 4;
 }
 
-.necklace {
+.necklaces {
   width: 500px;
   height: 1000px;
   position: absolute;
@@ -141,13 +144,14 @@ hr {
 }
 
 .nav-pills .nav-item {
-  width: 140px;
   text-align: center;
 }
+
 .nav-pills .nav-item .nav-link {
   border: 1px solid #ccc;
   border-radius: 0 !important;
 }
+
 .well {
   background-color: #eff1f1;
   height: 700px;
@@ -157,4 +161,10 @@ hr {
 .card {
   border: none;
   padding-top: 30px;
+}
+
+.bikinitop,
+.bikinibottom,
+.background {
+  background-size: contain;
 }
